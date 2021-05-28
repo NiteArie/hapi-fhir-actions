@@ -1,0 +1,43 @@
+version: '3.3'
+services:
+  hapi-fhir-openemr:
+    image: thedemoland/hapi-fhir-postgres
+    container_name: fhir-openemr
+    ports:
+    - '8081:8080'
+    restart: always
+  hapi-fhir-postgres:
+    image: thedemoland/hapi-fhir-postgres
+    container_name: fhir-postgres
+    ports:
+      - '8080:8080'
+    restart: always
+  db:
+    container_name: db
+    image: postgres
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USERNAME: postgres
+      POSTGRES_DB: hapi-persist-db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@pg.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - '80:80'
+    links:
+      - "db:pgsql-server"
+    restart: unless-stopped
+volumes:
+  pgdata:
+  pgadmin:
