@@ -24,10 +24,10 @@ jobs:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Step 4 - Get branch name
-        run: BRANCH_NAME = $(echo ${{ github.head_ref }} | cut -d'/' -f 3)
+      # - name: Step 4 - Get branch name
+      #   run: BRANCH_NAME = $(echo ${{ github.head_ref }} | cut -d'/' -f 3)
 
-      - run: echo $BRANCH_NAME
+      - run: echo ${{ github.head_ref }}
 
       - run: echo ${{ github.ref }}
 
