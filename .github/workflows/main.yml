@@ -15,7 +15,7 @@ jobs:
       - name: Step 2 - Set up JDK
         uses: actions/setup-java@v2.1.0
         with:
-          java-version: 11.0.11
+          java-version: '11'
           
       - name: Step 3 - Build project
         run: mvn compile jib:build
