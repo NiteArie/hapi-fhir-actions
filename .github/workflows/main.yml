@@ -25,8 +25,8 @@ jobs:
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
           
       - name: Step 3 - Build HAPI FHIR OpenEMR image
-        run: mvn compile jib:build -pl hapi-fhir-open-emr -Djib.to.image=loner7/hapi-fhir-open-emr:${{ GITHUB_SHA }}
+        run: mvn compile jib:build -pl hapi-fhir-open-emr -Djib.to.image=loner7/hapi-fhir-open-emr:${{ github.sha }}
         
       - name: Step 4 - Build HAPI FHIR Postgres image
-        run: mvn compile jib:build -pl hapi-fhir-postgres -Djib.to.image=loner7/hapi-fhir-postgres:${{ GITHUB_SHA }}
+        run: mvn compile jib:build -pl hapi-fhir-postgres -Djib.to.image=loner7/hapi-fhir-postgres:${{ github.sha }}
       
