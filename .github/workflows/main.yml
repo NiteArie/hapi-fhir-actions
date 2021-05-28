@@ -1,0 +1,32 @@
+
+name: HAPI FHIR Build
+
+on:
+  push:
+    branches: [ master , dev ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1 - Get code
+        uses: actions/checkout@v2
+        
+      - name: Step 2 - Set up JDK
+        uses: actions/setup-java@v2.1.0
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+          
+      - name: Step 3 - Login to Docker Hub
+        uses: docker/login-action@v1.9.0
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+          
+      - name: Step 3 - Build HAPI FHIR OpenEMR image
+        run: mvn compile jib:build -pl hapi-fhir-open-emr -Djib.to.image=${{ secrets.DOCKER_HUB_USERNAME }}/hapi-fhir-open-emr:${{ github.sha }}
+        
+      - name: Step 4 - Build HAPI FHIR Postgres image
+        run: mvn compile jib:build -pl hapi-fhir-postgres -Djib.to.image=${{ secrets.DOCKER_HUB_USERNAME }}/hapi-fhir-postgres:${{ github.sha }}
+      
