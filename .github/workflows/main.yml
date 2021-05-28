@@ -23,21 +23,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-
-      # - name: Step 4 - Get branch name
-      #   run: BRANCH_NAME = $(echo ${{ github.head_ref }} | cut -d'/' -f 3)
-
-      - run: echo ${{ github.head_ref }}
-
-      - run: echo ${{ github.ref }}
-
-      - run: echo ${{ github.base_ref }}
           
-      - name: Step 5 - Build HAPI FHIR OpenEMR image
-        run: mvn compile jib:build -pl hapi-fhir-open-emr \ 
-          -Djib.to.image=${{ secrets.DOCKER_HUB_USERNAME }}/hapi-fhir-open-emr:$BRANCH_NAME${{ github.sha }}
+      - name: Step 4 - Build HAPI FHIR OpenEMR image
+        run: mvn compile jib:build \ 
+          -pl hapi-fhir-open-emr -Djib.to.image=${{ secrets.DOCKER_HUB_USERNAME }}/hapi-fhir-open-emr:${{ github.ref | cut -d'/' -f 3 }}${{ github.sha }}
         
-      - name: Step 6 - Build HAPI FHIR Postgres image
-        run: mvn compile jib:build -pl hapi-fhir-postgres \ 
-          -Djib.to.image=${{ secrets.DOCKER_HUB_USERNAME }}/hapi-fhir-postgres:$BRANCH_NAME${{ github.sha }}
+      - name: Step 5 - Build HAPI FHIR Postgres image
+        run: mvn compile jib:build \ 
+          -pl hapi-fhir-postgres -Djib.to.image=${{ secrets.DOCKER_HUB_USERNAME }}/hapi-fhir-postgres:${{ github.ref | cut -d'/' -f 3 }}${{ github.sha }}
+      
+
       
