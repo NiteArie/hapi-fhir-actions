@@ -26,7 +26,7 @@ jobs:
 
       - name: Step 4 - Get branch name
         run: |
-          echo "branch_name=$(${{ github.ref }} | cut -d'/' -f 3) >> $GITHUB_ENV
+          echo "branch_name=$(${{ github.ref }} | cut -d'/' -f 3)" >> $GITHUB_ENV
 
       - run: echo '${{ github.ref }}'
           
