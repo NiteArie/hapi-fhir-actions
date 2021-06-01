@@ -32,7 +32,7 @@ jobs:
       # - use: 
       
       - name: Step 5 - Test slack
-        use: act10ns/slack@v1
+        uses: act10ns/slack@v1
         with: 
           status: ${{ job.status }}
           channel: '#general'
