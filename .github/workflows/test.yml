@@ -33,7 +33,7 @@ jobs:
 
       - name: Step 4 - Generate coverage
         id: coverage-generate
-        run: mvn -B verify -P coverage --no-transfer-progress
+        run: mvn -B verify --no-transfer-progress
 
       - run: ls
 

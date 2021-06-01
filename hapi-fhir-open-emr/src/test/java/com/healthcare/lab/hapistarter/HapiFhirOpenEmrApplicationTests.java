@@ -10,9 +10,7 @@ class HapiFhirOpenEmrApplicationTests {
 
     @Test
     void contextLoads() {
-        Logger logger = new Logger();
-
-        logger.fine("Hello World");
+        System.out.println("HEHEHEHEHE");
     }
 
 }

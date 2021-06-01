@@ -1,13 +1,17 @@
 version: '3.3'
 services:
   hapi-fhir-openemr:
-    image: thedemoland/hapi-fhir-postgres
+#    image: thedemoland/hapi-fhir-postgres
+#    image: loner7/hapi-fhir-open-emr:master8dc40f9475b892f713743d655a08b1da36c4c9b9
+    image: loner7/hapi-fhir-open-emr:master1de10633d4e329cd8c356a3d8ab892ffbefe1f65
     container_name: fhir-openemr
     ports:
     - '8081:8080'
     restart: always
   hapi-fhir-postgres:
-    image: thedemoland/hapi-fhir-postgres
+#    image: thedemoland/hapi-fhir-postgres
+#    image: loner7/hapi-fhir-postgres:master8dc40f9475b892f713743d655a08b1da36c4c9b9
+    image: loner7/hapi-fhir-postgres:master1de10633d4e329cd8c356a3d8ab892ffbefe1f65
     container_name: fhir-postgres
     ports:
       - '8080:8080'
