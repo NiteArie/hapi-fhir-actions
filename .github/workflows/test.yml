@@ -35,7 +35,7 @@ jobs:
         id: coverage-generate
         run: mvn -B verify --no-transfer-progress
 
-      - run: mvn jacoco:report 
+      - run: mvn jacoco:generate-report
 
       - run: ls
 
