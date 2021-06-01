@@ -14,3 +14,5 @@ Ne
 Ni
 
 No
+
+Na
