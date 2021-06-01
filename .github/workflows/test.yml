@@ -33,9 +33,10 @@ jobs:
 
       - name: Step 4 - Generate coverage
         id: coverage-generate
-        run: mvn -B verify --no-transfer-progress
+        # run: mvn -B verify --no-transfer-progress
+        run: mvn clean verify
 
-      - run: mvn jacoco:generate-report
+      - run: mvn jacoco:report -debug
 
       - run: ls
 
