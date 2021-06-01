@@ -28,16 +28,24 @@ jobs:
       #     password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
       - name: Step 3 - Start container
+        id: docker-compose
         run: docker-compose up -d 
 
-      # - name: Step 4 - Test comment
-      # - use: 
+      - name: Step 4 - Generate coverage
+        id: coverage-generate
+      - run: mvn -B verify -P coverage --no-transfer-progress
+
+      - uses: codecov/codecov-action@v1
+        with:
+          file: ./**/target/stide/jacoo/jacoo.xml
+          name: codecov
       
       - name: Step 5 - Test slack
-        uses: act10ns/slack@v1
+        use: act10ns/slack@v1
         with: 
           status: ${{ job.status }}
           channel: '#general'
         if: always()
+    
 
       
