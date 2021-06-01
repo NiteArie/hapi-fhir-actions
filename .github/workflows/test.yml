@@ -35,9 +35,12 @@ jobs:
         id: coverage-generate
         run: mvn -B verify -P coverage --no-transfer-progress
 
+      - run: ls
+
       - uses: codecov/codecov-action@v1
         with:
-          file: ./**/target/stide/jacoo/jacoo.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./**/target/site/jacoco/jacoco.xml
           name: codecov
       
       - name: Step 5 - Test slack
