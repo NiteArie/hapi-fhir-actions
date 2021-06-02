@@ -27,14 +27,14 @@ jobs:
       #     username: ${{ secrets.DOCKER_HUB_USERNAME }}
       #     password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      # - name: Step 3 - Start container
-      #   id: docker-compose
-      #   run: docker-compose up -d 
+      - name: Step 3 - Start container
+        id: docker-compose
+        run: docker-compose up -d 
 
       - name: Step 4 - Generate coverage
         id: coverage-generate
         # run: mvn -B verify --no-transfer-progress
-        run: mvn clean jacoco:prepare-agent install jacoco:report
+        run: mvn test
 
       - uses: codecov/codecov-action@v1
         with:
