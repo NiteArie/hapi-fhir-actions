@@ -34,11 +34,7 @@ jobs:
       - name: Step 4 - Generate coverage
         id: coverage-generate
         # run: mvn -B verify --no-transfer-progress
-        run: mvn clean verify
-
-      - run: mvn jacoco:report -debug
-
-      - run: ls
+        run: mvn clean jacoco:prepare-agent install jacoco:report
 
       - uses: codecov/codecov-action@v1
         with:
