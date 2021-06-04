@@ -25,6 +25,12 @@ jobs:
         id: docker-compose
         run: docker-compose up -d 
 
+      - name: Step  - Check style
+        uses: nikitasavinov/checkstyle-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: 'github-pr-check'
+
       - name: Step 4 - Generate coverage
         id: coverage-generate
         run: mvn test
